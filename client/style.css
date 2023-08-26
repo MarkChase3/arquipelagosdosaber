@@ -1,0 +1,11 @@
+body {
+    overflow: hidden;
+    background-color: black;
+}
+#canvas {
+    height: 95vh;
+    width: 177vh;
+    left: calc(90vh - 50vw);
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
