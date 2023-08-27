@@ -7,7 +7,7 @@ set :ssl_certificate, "server/cert.crt"
 set :ssl_key, "server/pkey.pem"
 set :port => 8080
 set :public_folder, 'client'
-nIslands = 0
+nIslands = redis.get('nIslands')
 
 post '/register' do
     hash = JSON.parse(request.body.read)
@@ -37,4 +37,22 @@ post '/island/new' do
     nIslands = (nIslands.to_i)
     redis.set('island.'+nIslands.to_s, hash['x'].to_s+','+hash['y'].to_s)
     redis.set('nIslands', nIslands)
+end
+
+post '/island/content' do
+    hash = JSON.parse(request.body.read)
+    if redis.get(hash['name']) == hash['password']
+        if redis.get('course.'+ hash['id'] + '.' + hash['name'])
+            redis.set('islandContent.'+hash['number'].to_s, JSON.parse(hash['content']))
+        end
+    end
+end
+
+post '/island/get/content' do
+    hash = JSON.parse(request.body.read)
+    if redis.get(hash['name']) == hash['password']
+        if redis.get('course.'+ hash['id'] + '.' + hash['name'])
+            return redis.get('islandContent.'+hash['number'].to_s)
+        end
+    end
 end

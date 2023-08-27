@@ -18,7 +18,7 @@ update['island'] = () => {
               'Content-Type': 'application/json'
             },        
             'body': JSON.stringify({
-                id: id.text,
+                id: id.toUpperCase(),
                 x:mousex*2,
                 y:mousey*2
             })

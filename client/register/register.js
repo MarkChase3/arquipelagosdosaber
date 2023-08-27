@@ -31,7 +31,7 @@ update['register'] = () => {
             },        
             'body': JSON.stringify({
                 name: name.text,
-                id: id.text,
+                id: id.text.toUpperCase(),
                 password: password.text,
             })
         }).then(e=>e.text().then(e=>{
