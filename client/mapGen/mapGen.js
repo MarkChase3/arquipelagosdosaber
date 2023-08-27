@@ -1,18 +1,22 @@
 function genMap(w, h){
     let map = Array.from({length: h}).map(e=>Array.from({length: w}).map(e=>-1))
     let newMap = Array.from({length: h}).map(e=>Array.from({length: w}).map(e=>-1))
-    let planSpot = {x: Math.floor(Math.random()*w), y: Math.floor(Math.random()*h)}
-    let lakeSpot = {x: Math.floor(Math.random()*w), y: Math.floor(Math.random()*h)}
-    let forestSpot = {x: Math.floor(Math.random()*w), y: Math.floor(Math.random()*h)}
+    let planSpot = {x: Math.floor(w/2), y: h+10}
+    let planSpot2 = {x: Math.floor(Math.random()*w), y: 0}
+    let lakeSpot = {x: Math.floor(Math.random()*w/2), y: Math.floor(Math.random()*(h-90)+40)}
+    let forestSpot = {x: Math.floor(Math.random()*w), y: Math.floor(Math.random()*(h-90)+40)}
+    let forestSpot2 = {x: Math.floor(Math.random()*w), y: Math.floor(Math.random()*(h-90)+40)}
     map.forEach((e,y)=>{e.forEach((e,x)=>{
-        let min = Math.min(Math.hypot(planSpot.x-x, planSpot.y-y), Math.hypot(forestSpot.x-x, forestSpot.y-y), Math.hypot(lakeSpot.x-x, lakeSpot.y-y))
-        if(min == Math.hypot(planSpot.x-x, planSpot.y-y)){
-            map[y][x] = 0
-        }
-        if(min == Math.hypot(lakeSpot.x-x, lakeSpot.y-y)){
+        let lake = Math.hypot(x-lakeSpot.x, y-lakeSpot.y)
+        let plan = Math.hypot(x-planSpot.x, y-planSpot.y)
+        let plan2 = Math.hypot(x-planSpot2.x, y-planSpot2.y)
+        let forest = Math.hypot(x-forestSpot.x, y-forestSpot.y)
+        let forest2 = Math.hypot(x-forestSpot2.x, y-forestSpot2.y)
+        if(Math.hypot(x-lakeSpot.x, y-lakeSpot.y)<w/5 && lake < plan && lake < forest && lake < forest2){
             map[y][x] = 1
-        }
-        if(min == Math.hypot(forestSpot.x-x, forestSpot.y-y)){
+        } else if((plan < forest && plan < forest2) || (plan2 < forest && plan2 < forest2) ){
+            map[y][x] = 0
+        } else {
             map[y][x] = 2
         }
     })})
@@ -23,7 +27,7 @@ function genMap(w, h){
         for(let offy = -Math.min(5, y); offy < Math.min(5, h-y); offy++)
         if(e == 1 && map[y+offy][x+offx] != 1)
         newMap[y][x] = 3
-        if(newMap[y][x] == 2 && Math.random()<0.05)
+        if(newMap[y][x] == 2 && Math.random()<0.01)
         newMap[y][x] = 4
     })})
     return newMap

@@ -99,7 +99,7 @@ function textarea(obj, range){
 if(obj.writing){
         for(let i in keys){
             if(i == 'Backspace' && keys[i] == down && tick % 4 == 0)obj.text = obj.text.substring(0, obj.text.length-1)
-            if(i == 'Enter' && tick % 8 == 0)obj.text += '\n'
+            if(i == 'Enter'  && keys[i] == down && tick % 16 == 0)obj.text += '\n'
             if(i.length == 1 && keys[i] == pressed){
                 obj.text += i
             }

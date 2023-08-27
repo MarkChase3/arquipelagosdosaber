@@ -9,8 +9,8 @@ update['game'] = () => {
             if (map[i][j] != 4) ctx.drawImage(spr[map[i][j]], j * 32, i * 32)
             else ctx.drawImage(spr[2], j * 32, i * 32)
         }
-    player.x += axisX() * 3
     ctx.drawImage(playerSpr, 0, 0, 32, 32, player.x, player.y, 32, 32)
+    player.x += axisX() * 3
     for (let i = Math.floor(cam.y / 32) - 2; i < Math.floor(cam.y / 32) + 25; i++)
         for (let j = Math.floor(cam.x / 32) - 1; j < Math.floor(cam.x / 32) + 41; j++)
             if (map[i][j] == 4) {

@@ -6,7 +6,7 @@ update['island'] = () => {
         e.frame+=1/60*16
         ctx.drawImage(islandSpr, Math.min(Math.floor(e.frame)*160, 2720-160), 0, 160, 90, e.x, e.y, 640,360)
         if(click == pressed && Math.hypot(mousex*2-(e.x+360), mousey*2-(e.y+180))<100){
-            room = 'contents'
+            room = 'mapChoose'
         }
     })
     if(click == pressed && room != 'contents'){
@@ -18,7 +18,7 @@ update['island'] = () => {
               'Content-Type': 'application/json'
             },        
             'body': JSON.stringify({
-                id: id.toUpperCase(),
+                id: id.text.toUpperCase(),
                 x:mousex*2,
                 y:mousey*2
             })
