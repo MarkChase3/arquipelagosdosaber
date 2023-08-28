@@ -18,6 +18,7 @@ islandSpr = await loadImage('islandMap/island.png');
 islandBackgroundSpr = await loadImage('islandMap/background.png');
 playerDeckSpr = await loadImage('deck/player.png')
 houseSetsSpr = await loadImage('contents/houseSets.png')
+houseSpr = await loadImage('chooseHouse/house.jpg')
 spr.push(await loadImage('game/grass.png'))
 spr.push(await loadImage('game/water.png'))
 spr.push(await loadImage('game/grass.png'))

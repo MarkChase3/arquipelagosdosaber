@@ -7,6 +7,7 @@ update['mapChoose'] = () => {
     renderMinimap(maps[3], 630, 393)
     if(click == pressed && mousex > 96 && mousex < 630+260 && mousey > 128 && mousey < 393 + 125){
         let id = Math.floor((mousey-128)/125)*2+Math.floor((mousex-96)/260)
+        map = maps[id]
         room = 'contents'
     }
 }

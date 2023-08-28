@@ -51,8 +51,6 @@ end
 post '/island/get/content' do
     hash = JSON.parse(request.body.read)
     if redis.get(hash['name']) == hash['password']
-        if redis.get('course.'+ hash['id'] + '.' + hash['name'])
-            return redis.get('islandContent.'+hash['number'].to_s)
-        end
+        return redis.get('islandContent.'+hash['number'].to_s)
     end
 end

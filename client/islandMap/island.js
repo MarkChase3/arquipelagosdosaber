@@ -9,7 +9,7 @@ update['island'] = () => {
             room = 'mapChoose'
         }
     })
-    if(click == pressed && room != 'contents'){
+    if(click == pressed && room != 'mapChoose'){
         islands.push({x:mousex*2-360, y:mousey*2-180, frame: 0})
         fetch('/island/new', {
             method: 'POST',

@@ -65,15 +65,35 @@ update['login'] = () => {
                             number: i,
                         })
                     }).then((o)=>{
-                            o.json().then(o=>{
-                                e.text = o.text.split('=>').join(':')
-                                houses[i].text = o.name.split('=>').join(':')
+                            o.text().then(o=>{
+                                e.text = JSON.parse(o.split('=>').join(':')).text
+                                houses[i].text = JSON.parse(o.split('=>').join(':')).name
                             })
                     })
                 })
             } else if(e.class == 'STUDENT'){
                 room = 'boat'
                 pos = 0
+                contents.forEach((e,i)=>{
+
+                fetch('/island/get/content', {
+                    method: 'POST',
+                    headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json'
+                    },        
+                    'body': JSON.stringify({
+                        name: name.text,
+                        id: id.text.toUpperCase(),
+                        password: password.text,
+                        number: i,
+                    })
+                }).then((o)=>{
+                    o.text().then(o=>{
+                        gameHouses.push(JSON.parse(o.split('=>').join(':')))
+                    })
+                })
+            })
             }
             if(room != 'NOTHING'){
                 islands = e.islands.filter(o=>o).map(e=>{return {x:e.split(',')[0]-360, y:e.split(',')[1]-180, frame:0}})

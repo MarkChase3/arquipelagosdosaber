@@ -1,8 +1,5 @@
-let map = genMap(260, 125)
-let gameHouses = []
-let player = { x: 640, y: 360, prex: 640, prey: 360 }
-let cam = { x: 64, y: 64 }
-update['game'] = () => {
+let canPlace = true
+update['chooseHouse'] = () => {
     ctx.save()
     ctx.translate(-cam.x, -cam.y)
     for (let i = Math.floor(cam.y / 32) - 2; i < Math.floor(cam.y / 32) + 25; i++)
@@ -10,27 +7,35 @@ update['game'] = () => {
             if (map[i][j] != 4) ctx.drawImage(spr[map[i][j]], j * 32, i * 32)
             else ctx.drawImage(spr[2], j * 32, i * 32)
         }
-    ctx.drawImage(playerSpr, 0, 0, 32, 32, player.x, player.y, 32, 32)
+    canPlace = true
     player.x += axisX() * 3
     for (let i = Math.floor(cam.y / 32) - 2; i < Math.floor(cam.y / 32) + 25; i++)
         for (let j = Math.floor(cam.x / 32) - 1; j < Math.floor(cam.x / 32) + 41; j++)
             if (map[i][j] == 4) {
                 ctx.drawImage(spr[map[i][j]], j * 32, i * 32)
-                if (player.x + 32 > j * 32 && player.x < j * 32 + 64 && player.y + 32 > i * 32 && player.y < i * 32 + 96) {
-                    player.x = player.prex
+                if (player.x + 64 > j * 32 && player.x < j * 32 + 64 && player.y + 64 > i * 32 && player.y < i * 32 + 96) {
+                    canPlace = false
                 }
             }
+    if(keys['Enter']){
+        fetch('/island/content', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },        
+            'body': JSON.stringify({
+                name: name.text,
+                id: id.text.toUpperCase(),
+                password: password.text,
+                number: indexIsland,
+                content: JSON.stringify({local:{x:player.x, y:player.y}, text: contents[indexIsland].text, name: houses[indexIsland].text})
+            })
+        })
+        room = 'contents'
+    }
+    if(canPlace)ctx.drawImage(houseSpr, 0, 0, 1500, 1500, player.x, player.y, 128, 128)
     player.y += axisY() * 3
-    for (let i = Math.floor(cam.y / 32) - 2; i < Math.floor(cam.y / 32) + 25; i++)
-        for (let j = Math.floor(cam.x / 32) - 1; j < Math.floor(cam.x / 32) + 41; j++)
-            if (map[i][j] == 4) {
-                if (player.x + 32 > j * 32 && player.x < j * 32 + 64 && player.y + 32 > i * 32 && player.y < i * 32 + 96) {
-                    player.y = player.prey
-                }
-            }
-    gameHouses.forEach(e=>{
-        ctx.drawImage(houseSpr, 0, 0, 1500, 1500, e.local.x, e.local.y, 128, 128)
-    })
     ctx.restore()
     if (Math.abs((cam.x + 640) - player.x) > 100 && Math.abs(cam.x - player.x) > 540) {
         cam.x += (player.x - player.prex)
