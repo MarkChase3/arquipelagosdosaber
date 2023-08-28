@@ -16,10 +16,16 @@ update['contents'] = (e) => {
     for(let i = 0; i < houses.length; i++){
         textarea(houses[i], {x:280, y:260+i*65})
     }
-    if(click == pressed && mousex > 460 && mousex < 510){
+    if(click == pressed && mousex > 410 && mousex < 460){
         indexIsland = Math.floor((mousey-130)/30)
         if(indexIsland >= 0 && indexIsland<4 && indexIsland<houses.length){
             room = 'chooseHouse'
+        }
+    }
+    if(click == pressed && mousex > 470 && mousex < 540){
+        indexIsland = Math.floor((mousey-130)/30)
+        if(indexIsland >= 0 && indexIsland<4 && indexIsland<houses.length){
+            room = 'avaliationSet'
         }
     }
     if(book > -1 ){
@@ -32,7 +38,7 @@ update['contents'] = (e) => {
             book = -1   
         }
     }
-    if(click == pressed && mousex > 350 && mousex < 420){
+    if(click == pressed && mousex > 350 && mousex < 400){
         let id = Math.floor((mousey-130)/30)
         if(id >= 0 && id<4 && id<houses.length){
             book = id

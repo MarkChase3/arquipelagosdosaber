@@ -30,6 +30,10 @@ update['game'] = () => {
             }
     gameHouses.forEach(e=>{
         ctx.drawImage(houseSpr, 0, 0, 1500, 1500, e.local.x, e.local.y, 128, 128)
+        if (player.x + 32 > e.local.x && player.x < e.local.x + 96 && player.y + 32 > e.local.y && player.y < e.local.y + 96) {
+            room = 'insideHouse'
+            currentHouse = e
+        }
     })
     ctx.restore()
     if (Math.abs((cam.x + 640) - player.x) > 100 && Math.abs(cam.x - player.x) > 540) {
