@@ -14,8 +14,10 @@ update['insideHouse'] = () => {
         player.x = currentHouse.x+32
         player.y = currentHouse.y+96
     }
-    if(housePlayer.y > 300 && housePlayer.x > 950){
+    if(housePlayer.y < 300 && housePlayer.x > 950){
         contentRendering = true
+    } else {
+        contentRendering = false
     }
     if(contentRendering){
         ctx.drawImage(bookSpr, 0, 0, 640, 360, 150, 80, 1280, 720)

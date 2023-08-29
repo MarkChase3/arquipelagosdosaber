@@ -1,5 +1,6 @@
 let question = {text: ''}
 let options = [{text: ''}, {text: ''}, {text: ''}, {text: ''}]
+let right = -1
 update['avaliationSet'] = () => {
     ctx.drawImage(avaliationSpr, 0, 0, 128, 72, 0, 0, 1280, 720)
     ctx.drawImage(avaliationQuestionSpr, 0, 0, 128, 72, 0, 0, 1280, 720)
@@ -24,6 +25,7 @@ update['avaliationSet'] = () => {
                 if(i!=id)e.writing = false
             })
             question.writing = false
+
         }
     }
     for (let index = 0; index < options.length; index++) {
@@ -31,5 +33,6 @@ update['avaliationSet'] = () => {
     }
     if(keys['Enter'] && !question.writing){
         room = 'contents'
+        right = options.findIndex(e=>e.writing)
     }
 }
