@@ -29,7 +29,7 @@ update['chooseHouse'] = () => {
                 id: id.text.toUpperCase(),
                 password: password.text,
                 number: indexIsland,
-                content: JSON.stringify({local:{x:player.x, y:player.y}, text: contents[indexIsland].text, name: houses[indexIsland].text})
+                content: JSON.stringify({local:{x:player.x, y:player.y}, text: contents[indexIsland].text, name: houses[indexIsland].text, question: question.text, answers: answers.map(e=>e.text)})
             })
         })
         room = 'contents'

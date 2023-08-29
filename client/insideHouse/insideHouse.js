@@ -10,7 +10,7 @@ update['insideHouse'] = () => {
     housePlayer.y = Math.min(610, Math.max(160, housePlayer.y))
     housePlayer.x = Math.min(1230, Math.max(20, housePlayer.x))
     if(housePlayer.y == 610 && housePlayer.x > 320 && housePlayer.x < 380){
-        room = 'game'
+        room = 'exam'
         player.x = currentHouse.x+32
         player.y = currentHouse.y+96
     }

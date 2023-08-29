@@ -6,4 +6,5 @@ let room = 'menu';
 let ctx;
 let tick = 0;
 let spr = []
-let playerSpr, mapChooseSpr, bookSpr, tileset1IntroSpr, tileset2IntroSpr, introMap, houseSpr, backgroundHouseSpr, notepadSpr, avaliationSpr;
+let playerSpr, mapChooseSpr, bookSpr, tileset1IntroSpr, tileset2IntroSpr, introMap, houseSpr, backgroundHouseSpr, notepadSpr, avaliationSpr, avaliationQuestionSpr;
+let optionSpr;
